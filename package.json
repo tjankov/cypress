@@ -1,15 +1,23 @@
 {
   "name": "tamara",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "cypress": "^8.5.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "./node_modules/.bin/cypress open"
+    "test": "cypress open"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjankov/cypress.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tjankov/cypress/issues"
+  },
+  "homepage": "https://github.com/tjankov/cypress#readme",
+  "description": ""
 }
