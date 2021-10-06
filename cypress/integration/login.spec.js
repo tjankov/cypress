@@ -52,6 +52,13 @@ describe ("login tests",() => {
         cy.get ('button[type="submit"]').click();
     })
 
+    it ("all empty fields",() =>{
+        cy.wait (3000);
+        cy.get ('input[id="email"]').clear();
+        cy.get ('input[id="password"]').clear();
+        cy.get ('button[type="submit"]').click();
+    })
+
     
 });
 
