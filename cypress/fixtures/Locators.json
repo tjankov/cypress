@@ -1,0 +1,21 @@
+{
+    "Header":{
+        "loginButton":"a[href='/login']",
+        "registerButton":"a[href='/register']",
+        "logoutButton":"a[role='button ']"
+    },
+
+    "commonElements":{
+        "emailInput":"#email",
+        "passwordInput":"#password",
+        "submitButton":"button[type='submit']"
+    },
+
+    "registerPage":{
+        "firstNameInput":"#first-name",
+        "lastNameInput":"#last-name",
+        "passwordConfirmationInput":"#password-confirmation",
+        "checkBox":"input[type='checkbox']"
+    }
+    
+}
