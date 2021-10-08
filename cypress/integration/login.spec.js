@@ -9,6 +9,8 @@ describe ("login tests",() => {
         cy.get ('a[href="/login"]').click();
     })
     
+//POSITIVE TEST CASES
+
     it ("login with valid data", () => {
         cy.get ('input[id="email"]').type('pera30@gmail.com')
         cy.get ('input[id="password"]').type('pera1234')
@@ -23,6 +25,9 @@ describe ("login tests",() => {
         cy.wait (3000);
         cy.get('a[class="nav-link nav-buttons"]').eq(2).click();
     })
+
+
+//NEGATIVE TEST CASES
 
     it ("login with invalid password",() =>{
         cy.wait (3000);
@@ -52,6 +57,12 @@ describe ("login tests",() => {
         cy.get ('button[type="submit"]').click();
     })
 
-    
+    it ("login with all empty fields",() =>{
+        cy.wait (3000);
+        cy.get ('input[id="email"]').clear();
+        cy.get ('input[id="password"]').clear();
+        cy.get ('button[type="submit"]').click();
+    })
+
 });
 
