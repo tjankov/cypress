@@ -20,6 +20,10 @@ export default class LoginPage {
         return cy.get ("a[role='button ']");
     }
 
+    get errorMessage (){
+        return cy.get (".alert");
+    }
+
     login (email,password){
         this.loginButton.click();
         this.emailInput.type(email);

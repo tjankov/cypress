@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "cypress": "^8.5.0",
     "faker": "^5.5.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^8.5.0"
+  },
   "scripts": {
     "test": "cypress open"
   },
