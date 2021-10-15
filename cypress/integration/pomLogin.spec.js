@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+import { navigationPage } from '../page_objects/navigationPage';
 import { loginPage } from './../page_objects/loginPage';
 
 const faker = require ('faker');
@@ -18,7 +19,55 @@ describe('POM login',()=>{
         cy.url().should('contains', 'https://gallery-app')
     });
 
-    it.only ('Login with valid credentials',()=>{
+    it ('Negative: login with invalid password',()=>{
+        cy.intercept (
+            'POST', 
+            'https://gallery-api.vivifyideas.com/api/auth/login'
+        ).as("invalidLogin");
+        
+        loginPage.login(correctEmail,userData.randomPassword);
+
+        cy.wait('@invalidLogin').then((interception)=>{
+            expect(interception.response.statusCode).eq(401);
+            expect(interception.response.body.error).eq("Unauthorized");
+            expect(interception.response.statusMessage).eq("Unauthorized")
+            console.log(interception.response)
+        });
+
+        navigationPage.logoutButton.should('not.exist');
+        navigationPage.createButton.should('not.exist');
+        navigationPage.galleryAppButton.should('be.visible');
+        navigationPage.allGalleriesButton.should('be.visible');
+        navigationPage.myGalleriesButton.should('not.exist');
+        navigationPage.loginButton.should('be.visible');
+        navigationPage.registerButton.should('be.visible');
+    });
+
+    it ('Negative: login with invalid email',()=>{
+        cy.intercept (
+            'POST', 
+            'https://gallery-api.vivifyideas.com/api/auth/login'
+        ).as("invalidLogin");
+        
+        loginPage.login(userData.randomEmail,correctPassword);
+
+        cy.wait('@invalidLogin').then((interception)=>{
+            expect(interception.response.statusCode).eq(401);
+            expect(interception.response.body.error).eq("Unauthorized");
+            expect(interception.response.statusMessage).eq("Unauthorized")
+            console.log(interception.response)
+        });
+
+        navigationPage.logoutButton.should('not.exist');
+        navigationPage.createButton.should('not.exist');
+        navigationPage.galleryAppButton.should('be.visible');
+        navigationPage.allGalleriesButton.should('be.visible');
+        navigationPage.myGalleriesButton.should('not.exist');
+        navigationPage.loginButton.should('be.visible');
+        navigationPage.registerButton.should('be.visible');
+    });
+
+    it ('Login with valid credentials',()=>{
         cy.intercept (
             'POST', 
             'https://gallery-api.vivifyideas.com/api/auth/login'
@@ -28,9 +77,16 @@ describe('POM login',()=>{
 
             cy.wait('@validLogin').then((interception)=>{
                 expect(interception.response.statusCode).eq(200);
+                console.log(interception.response)
             });
 
-        loginPage.logoutButton.should('be.visible');
+            navigationPage.logoutButton.should('be.visible');
+            navigationPage.createButton.should('be.visible');
+            navigationPage.galleryAppButton.should('be.visible');
+            navigationPage.allGalleriesButton.should('be.visible');
+            navigationPage.myGalleriesButton.should('be.visible');
+            navigationPage.loginButton.should('not.exist');
+            navigationPage.registerButton.should('not.exist');
     });
 
     it ('Logout',()=>{
@@ -44,18 +100,22 @@ describe('POM login',()=>{
         loginPage.logoutButton.should('not.exist');
 
         cy.wait ('@logout').then((interception)=>{
-            expect(interception.response.body.message).eq('Successfuly logged out');
+            expect(interception.response.body.message).eq('Successfully logged out');
             expect(interception.response.statusCode).eq(200);
         });
-    });
 
-    it ('Login with invalid credentials',()=>{
-        loginPage.login(userData.randomEmail,userData.randomPassword);
-        loginPage.logoutButton.should('not.exist');
-        loginPage.errorMessage.should('be.visible');
-        loginPage.errorMessage.should('have css', 'background color', 'rgb(248, 215, 218)');
-        loginPage.errorMessage.should('have.text', 'Bad Credentials');
+        navigationPage.logoutButton.should('not.exist');
+        navigationPage.createButton.should('not.exist');
+        navigationPage.galleryAppButton.should('be.visible');
+        navigationPage.allGalleriesButton.should('be.visible');
+        navigationPage.myGalleriesButton.should('not.exist');
+        navigationPage.loginButton.should('be.visible');
+        navigationPage.registerButton.should('be.visible');
     });
-    
-    
 });
+
+
+
+
+
+

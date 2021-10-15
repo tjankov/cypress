@@ -1,9 +1,5 @@
 export default class RegisterPage {
 
-    get registerButton(){
-        return cy.get('a[href="/register"]');
-    }
-
     get firstNameInput(){
         return cy.get('input[id="first-name"]');
     }
@@ -26,9 +22,9 @@ export default class RegisterPage {
         return cy.get('button[type="submit"]');
     }
 
-    get logoutButton (){
-        return cy.get ("a[role='button ']");
-    }
+    get registerButton(){
+    return cy.get('a[href="/register"]');
+}
 
     register (firstName, lastName, email, password, passwordConfirmation){
         this.registerButton.click();
@@ -48,8 +44,6 @@ export default class RegisterPage {
     get errorMessage2 (){
         return cy.get (".alert").last();
     }
-
-
 
 } 
 

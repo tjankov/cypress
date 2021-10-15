@@ -49,8 +49,13 @@ export default class CreateGallery {
     }
 
     get myPhotoId (){
-        return cy.get (a[href='/galleries/1934']);
+        return cy.get ("a[href='/galleries/1934']");
     }
+
+    get deleteButton (){
+        return cy.get ("button[class='btn btn-custom']")
+    }
+
 
 
     login (email,password){
@@ -102,6 +107,10 @@ export default class CreateGallery {
         this.titleInput.type(title);
         this.descriptionInput.type(description);
         this.submitButtonCreate.click();
+    }
+
+    deleteGallery (){
+        this.deleteButton.click();
     }
 
 }

@@ -1,5 +1,9 @@
 export default class LoginPage {
 
+    get loginButton (){
+        return cy.get ("a[href='/login']");
+    }
+    
     get submitButton (){
         return cy.get ("button[type='submit']");
     }

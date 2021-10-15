@@ -4,5 +4,15 @@
         "validEmailAdress": "pera30@gmail.com",
         "validPassword": "pera1234"
     },
+    "envCreate": {
+        "title" : "Jesen",
+        "description" : "Hladan kisni dan",
+        "image1" : "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/rainy-autumn-day-mike-murdock.jpg",
+        "image2" : "https://c.stocksy.com/a/Zsy400/z9/1187335.jpg"
+    },
+
+
+
+
     "videoOnPasses": false
 }
