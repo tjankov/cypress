@@ -24,7 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('loginViaBackend', (email, password) =>{
+Cypress.Commands.add(
+    'loginViaBackend', 
+    (email, password) =>{
     cy.request(
         'POST',
         'https://gallery-api.vivifyideas.com/api/auth/login',{
@@ -35,6 +37,48 @@ Cypress.Commands.add('loginViaBackend', (email, password) =>{
         window.localStorage.setItem('token', response.access_token);
         window.localStorage.setItem('userId', response.user_id);
         });  
+});
+
+Cypress.Commands.add(
+    "createGalleryViaBackend",
+    (title, description, imageUrl) => {
+      cy.request({
+        method: "POST",
+        url: "https://gallery-api.vivifyideas.com/api/galleries",
+        body: {
+          title: title,
+          description: description,
+          images: [imageUrl],
+        },
+        headers: {
+          authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
+      });
+    });
+
+Cypress.Commands.add("deleteGalleryViaBackend", (id) => {
+    cy.request({
+      method: "DELETE",
+      url: `https://gallery-api.vivifyideas.com/api/galleries/${id}`,
+      headers: {
+        authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    });
+});
+
+Cypress.Commands.add("editGalleryViaBackend", (id, title, description, imageUrl) => {
+  cy.request({
+    method: "PUT",
+    url: `https://gallery-api.vivifyideas.com/api/galleries/${id}`,
+    body: {
+      title: title,
+      description: description,
+      images: [imageUrl],
+    },
+    headers: {
+      authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    },
+  });
 });
 
 
